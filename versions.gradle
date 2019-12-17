@@ -25,6 +25,7 @@ versions.test_core = "1.2.0"
 versions.test_junit = "1.1.1"
 versions.test_rules = "1.2.0"
 versions.test_runner = "1.2.0"
+versions.pagingVersion = "2.1.0"
 ext.versions = versions
 
 def support = [:]
@@ -34,6 +35,7 @@ support.recyclerview = "androidx.recyclerview:recyclerview:${versions.support}"
 support.design = "com.google.android.material:material:${versions.support}"
 support.core_utils = "androidx.legacy:legacy-support-core-utils:${versions.support}"
 support.core_ktx = "androidx.core:core-ktx:${versions.core_ktx}"
+support.paging = "androidx.paging:paging-runtime:${versions.pagingVersion}"
 deps.support = support
 
 

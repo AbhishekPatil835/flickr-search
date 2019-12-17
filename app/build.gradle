@@ -35,6 +35,7 @@ dependencies {
     implementation deps.support.core_ktx
     implementation deps.support.design
     implementation deps.constraint_layout
+    implementation deps.support.paging
 
     //coroutines
     implementation deps.coroutines.android
