@@ -1,6 +1,6 @@
 package com.example.Flickr.di.modules
 
-import com.example.Flickr.MainActivity
+import com.example.Flickr.search.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

@@ -2,6 +2,7 @@ package com.example.Flickr.di.modules
 
 import com.example.Flickr.data.FlickrApi
 import com.example.Flickr.di.NetworkModule
+import com.example.Flickr.repo.remote.SearchRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
@@ -31,6 +32,10 @@ class AppModule {
             .build()
     }
 
+    @Singleton
+    @Provides
+    fun provideSearchRemoteDataSource(flickrApi: FlickrApi)
+            = SearchRemoteDataSource(flickrApi)
 
     @Provides
     fun provideCoroutineScopeIO() = CoroutineScope(Dispatchers.IO)
