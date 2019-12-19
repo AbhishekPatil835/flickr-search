@@ -59,6 +59,11 @@ dependencies {
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
 
+    //room
+    implementation deps.room.runtime
+    implementation deps.room.ktx
+    kapt deps.room.compiler
+
     //network
     implementation deps.network.retrofit
     implementation deps.network.gson
@@ -71,12 +76,14 @@ dependencies {
     testImplementation deps.mockito.core
     testImplementation deps.network.mock
     testImplementation deps.arch_core.testing
+    testImplementation deps.test.mockk
 
-
+    androidTestImplementation deps.arch_core.testing
     androidTestImplementation deps.test.runner
     androidTestImplementation deps.test.rules
     androidTestImplementation deps.test.ext_junit
     androidTestImplementation deps.mockito.core
     androidTestImplementation deps.mockito.android
     androidTestImplementation deps.network.mock
+    androidTestImplementation deps.test.mockk_android
 }

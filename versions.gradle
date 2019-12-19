@@ -30,7 +30,9 @@ versions.test_core = "1.2.0"
 versions.test_junit = "1.1.1"
 versions.test_rules = "1.2.0"
 versions.test_runner = "1.2.0"
+versions.room = "2.2.0-alpha01"
 versions.pagingVersion = "2.1.0"
+versions.mockk = "1.9"
 ext.versions = versions
 
 def support = [:]
@@ -86,6 +88,8 @@ test.core = "androidx.test:core:${versions.test_core}"
 test.ext_junit = "androidx.test.ext:junit:${versions.test_junit}"
 test.runner = "androidx.test:runner:${versions.test_runner}"
 test.rules = "androidx.test:rules:${versions.test_rules}"
+test.mockk = "io.mockk:mockk:${versions.mockk}"
+test.mockk_android = "io.mockk:mockk-android:${versions.mockk}"
 deps.test = test
 
 def mockito = [:]
@@ -98,6 +102,13 @@ def arch_core = [:]
 arch_core.runtime = "androidx.arch.core:core-runtime:$versions.arch_core"
 arch_core.testing = "androidx.arch.core:core-testing:$versions.arch_core"
 deps.arch_core = arch_core
+
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+room.testing = "androidx.room:room-testing:$versions.room"
+room.ktx = "androidx.room:room-ktx:${versions.room}"
+deps.room = room
 
 deps.mock_web_server = "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver"
 deps.android_gradle_plugin = "com.android.tools.build:gradle:${versions.android_gradle_plugin}"
