@@ -1,13 +1,14 @@
 package com.example.Flickr.data
 
+import retrofit2.Call
 import retrofit2.Response
 
 abstract class BaseDataSource {
 
-    protected suspend fun <T> getResult(call: suspend () -> Response<T>): Result<T> {
+    protected  fun <T> getResult(call:  () -> Call<T>): Result<T> {
 
         try {
-            val response = call()
+            val response = call().execute()
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) return Result.success(body)

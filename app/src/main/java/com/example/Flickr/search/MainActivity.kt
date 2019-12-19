@@ -88,10 +88,18 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
 
 
+
         data?.pagedList?.observe(this, Observer {
 
             adapter.submitList(it)
+            if (it.size == 0) {
+                llNoResults.visibility = View.VISIBLE
+                rvPhotos.visibility = View.GONE
+            } else {
+                llNoResults.visibility = View.GONE
+                rvPhotos.visibility = View.VISIBLE
 
+            }
         })
     }
 

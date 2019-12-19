@@ -1,5 +1,6 @@
 package com.example.Flickr.data
 
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,8 +13,8 @@ interface FlickrApi {
     }
 
     @GET(".")
-    suspend fun searchPhotos(@Query("per_page") perpage: Int,
+     fun searchPhotos(@Query("per_page") perpage: Int,
                              @Query("page") page: Int,
                              @QueryMap options: Map<String,String>,
-                             @Query("nojsoncallback") noJson: Int = 1): Response<SearchResult>
+                             @Query("nojsoncallback") noJson: Int = 1): Call<SearchResult>
 }

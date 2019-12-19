@@ -55,26 +55,21 @@ class SearchDataSource @Inject constructor(
 
     private fun fetchData(query: String,page: Int, pageSize: Int, callback: (List<Photo>) -> Unit) {
 
-        coroutineScope.launch(getJobErrorHandler()) {
+        val response = remoteDataSource.search(query,page)
 
-            val response = remoteDataSource.search(query,page)
-
-            Log.e("SearchRepo"," $response")
+        Log.e("SearchRepo"," $response")
 
 
-            if (response.status == Result.Status.SUCCESS) {
+        if (response.status == Result.Status.SUCCESS) {
 
-                val results = response.data?.photos?.photos
+            val results = response.data?.photos?.photos
 
-                callback(results!!)
-                networkState.postValue(NetworkState.LOADED)
+            callback(results!!)
+            networkState.postValue(NetworkState.LOADED)
 
-            } else if (response.status == Result.Status.ERROR) {
-                networkState.postValue(NetworkState.error(response.message ?: "unknown err"))
-                postError(response.message!!)
-            }
-
-
+        } else if (response.status == Result.Status.ERROR) {
+            networkState.postValue(NetworkState.error(response.message ?: "unknown err"))
+            postError(response.message!!)
         }
     }
 
