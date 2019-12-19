@@ -15,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @RunWith(JUnit4::class)
 class FlickrApiTest {
 
+
     @Rule
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.example.Flickr.OpenForTesting
 import com.example.Flickr.data.Data
 import com.example.Flickr.data.Photo
 import com.example.Flickr.repo.remote.SearchDataSourceFactory
@@ -12,7 +13,9 @@ import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
 @Singleton
+@OpenForTesting
 class SearchRepo @Inject constructor(private val searchRemoteDataSource: SearchRemoteDataSource) {
 
     fun searchPhoto(query: String): Data<Photo> {

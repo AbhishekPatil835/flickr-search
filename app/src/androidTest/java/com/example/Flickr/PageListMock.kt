@@ -1,6 +1,7 @@
 package com.example.Flickr
 
 import android.database.Cursor
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.paging.DataSource
@@ -18,11 +19,13 @@ import org.mockito.Mockito
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
+val pageSize = 5
 fun <T> List<T>.asPagedList(config: PagedList.Config? = null): PagedList<T>? {
+
     val defaultConfig = PagedList.Config.Builder()
         .setEnablePlaceholders(false)
-        .setPageSize(size)
-        .setMaxSize(size + 2)
+        .setPageSize(pageSize)
+        .setMaxSize(pageSize + 2)
         .setPrefetchDistance(1)
         .build()
     return LivePagedListBuilder<Int, T>(

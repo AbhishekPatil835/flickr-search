@@ -16,6 +16,7 @@ versions.mockito = "2.25.0"
 versions.mockito_all = "1.10.19"
 versions.mockito_android = "2.25.0"
 versions.mockwebserver = "3.8.1"
+versions.espresso = "3.2.0"
 versions.retrofit = '2.6.0'
 versions.navigationVersion = '2.0.0'
 versions.daggerVersion = "2.16"
@@ -109,6 +110,12 @@ room.compiler = "androidx.room:room-compiler:$versions.room"
 room.testing = "androidx.room:room-testing:$versions.room"
 room.ktx = "androidx.room:room-ktx:${versions.room}"
 deps.room = room
+
+def espresso = [:]
+espresso.core = "androidx.test.espresso:espresso-core:${versions.espresso}"
+espresso.contrib = "androidx.test.espresso:espresso-contrib:$versions.espresso"
+espresso.intents = "androidx.test.espresso:espresso-intents:$versions.espresso"
+deps.espresso = espresso
 
 deps.mock_web_server = "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver"
 deps.android_gradle_plugin = "com.android.tools.build:gradle:${versions.android_gradle_plugin}"

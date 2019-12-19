@@ -1,12 +1,14 @@
 package com.example.Flickr.repo.remote
 
 import android.nfc.tech.MifareUltralight.PAGE_SIZE
+import com.example.Flickr.OpenForTesting
 import com.example.Flickr.data.BaseDataSource
 import com.example.Flickr.data.FlickrApi
 import com.example.Flickr.data.Result
 import com.example.Flickr.data.SearchResult
 import javax.inject.Inject
 
+@OpenForTesting
 class SearchRemoteDataSource @Inject constructor(val service: FlickrApi) : BaseDataSource() {
 
     val map = HashMap<String,String>()

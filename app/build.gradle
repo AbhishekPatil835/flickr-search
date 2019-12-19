@@ -4,7 +4,12 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-allopen'
 
+allOpen {
+    // allows mocking for classes w/o directly opening them for release builds
+    annotation 'com.example.Flickr.OpenClass'
+}
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -86,4 +91,7 @@ dependencies {
     androidTestImplementation deps.mockito.android
     androidTestImplementation deps.network.mock
     androidTestImplementation deps.test.mockk_android
+    androidTestImplementation deps.espresso.core
+    androidTestImplementation deps.espresso.contrib
+    androidTestImplementation deps.espresso.intents
 }

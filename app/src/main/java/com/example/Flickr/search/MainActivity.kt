@@ -34,6 +34,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.lifecycle.ViewModel
 import com.example.Flickr.data.ERROR
 import com.example.Flickr.data.LIST
 import com.example.Flickr.data.NO_DATA
@@ -95,9 +96,13 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         }
 
 
-        searchPhotos()
+
     }
 
+    override fun onResume() {
+        super.onResume()
+        searchPhotos()
+    }
 
 
     private fun searchPhotos(query: String = oldQuery) {
@@ -193,6 +198,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         ivIcon.setImageDrawable(ContextCompat.getDrawable(this,icon))
         ivTitle.text = resources.getString(title)
         ivMessage.text = resources.getString(message)
+    }
+
+    fun setTestViewModel(viewModel: SearchVM) {
+        searchVM = viewModel
     }
 
 }
