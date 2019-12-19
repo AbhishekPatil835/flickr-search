@@ -20,6 +20,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 val pageSize = 5
+
 fun <T> List<T>.asPagedList(config: PagedList.Config? = null): PagedList<T>? {
 
     val defaultConfig = PagedList.Config.Builder()

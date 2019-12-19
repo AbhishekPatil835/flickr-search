@@ -78,6 +78,9 @@ class InjectableActivityScenario<T : Activity>(private val activityClass: Class<
         } else {
             ActivityScenario.launch(activityClass)
         }
+
+
+
         return this
     }
 
@@ -187,7 +190,7 @@ class InjectableActivityScenario<T : Activity>(private val activityClass: Class<
                     }
                     activityInjectors.forEach { if (it.inject(activity)) return }
                 }
-                Stage.DESTROYED -> {
+                Stage.STOPPED -> {
                     if (activity is FragmentActivity) {
                         activity.supportFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentCallbacks)
                     }
