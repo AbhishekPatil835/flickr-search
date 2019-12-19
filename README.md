@@ -6,7 +6,7 @@
 This App follows MVVM architecture along with repository as an abstraction layer which interacts with  Network to fetch the data. 
 It uses Android paging library to perform endless scroll.
 
-##TechStack used in this app
+## TechStack used in this app
 1. Retrofit and Okhttp  : For Networking
 2. Espresso: For activity testing with all states
 3. Mockito : For Unit Testing of FlickrApi
