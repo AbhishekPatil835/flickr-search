@@ -116,16 +116,19 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
             when (it.status) {
                 Status.RUNNING -> {
-
+                    toggleLoading(true)
                 }
                 Status.SUCCESS -> {
+                    toggleLoading(false)
                     show(LIST)
                     oldQuery = newQuery
                 }
                 Status.FAILED -> {
+                    toggleLoading(false)
                     show(ERROR)
                 }
                 Status.NO_DATA -> {
+                    toggleLoading(false)
                     if (adapter.itemCount  == 0 || oldQuery != newQuery )
                             show(NO_DATA)
 
@@ -155,6 +158,11 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     private fun dismissKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(etSearch.windowToken, 0)
+    }
+
+    private fun toggleLoading(show: Boolean) {
+        ivSearch.visibility = if(show) View.GONE else View.VISIBLE
+        pbLoading.visibility = if(show) View.VISIBLE else View.GONE
     }
 
     private fun show(what:Int = LIST) {

@@ -36,6 +36,15 @@
             android:layout_gravity="end|center_vertical"
             android:layout_marginEnd="@dimen/margin_small"
             app:srcCompat="@drawable/ic_search" />
+
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="@dimen/margin_small"
+            style="?android:attr/progressBarStyleSmall"
+            android:visibility="gone"/>
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
