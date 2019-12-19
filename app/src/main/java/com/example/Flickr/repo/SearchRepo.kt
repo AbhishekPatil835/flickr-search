@@ -3,6 +3,7 @@ package com.example.Flickr.repo
 import android.util.Log
 import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.example.Flickr.data.Data
 import com.example.Flickr.data.Photo
 import com.example.Flickr.repo.remote.SearchDataSourceFactory
@@ -12,14 +13,12 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SearchRepo @Inject constructor(private val searchRemoteDataSource: SearchRemoteDataSource,
-                                     private val coroutineScope: CoroutineScope
-) {
+class SearchRepo @Inject constructor(private val searchRemoteDataSource: SearchRemoteDataSource) {
 
     fun searchPhoto(query: String): Data<Photo> {
         Log.e("SearchRepo"," $query ")
         val dataSourceFactory = SearchDataSourceFactory(searchRemoteDataSource,
-            coroutineScope,query
+            query
         )
 
 
@@ -30,7 +29,8 @@ class SearchRepo @Inject constructor(private val searchRemoteDataSource: SearchR
 
         return Data(
             LivePagedListBuilder(dataSourceFactory,
-                SearchDataSourceFactory.pagedListConfig()).build(),networkState)
+                SearchDataSourceFactory.pagedListConfig())
+                .build(),networkState)
 
     }
 

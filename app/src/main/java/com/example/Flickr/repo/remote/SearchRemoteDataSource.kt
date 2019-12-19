@@ -18,10 +18,10 @@ class SearchRemoteDataSource @Inject constructor(val service: FlickrApi) : BaseD
 
     }
 
-     fun search(query: String,page:Int) : Result<SearchResult> {
+     fun search(perPage:Int,query: String,page:Int) : Result<SearchResult> {
 
         map["text"] = query
-        return getResult { service.searchPhotos(20,page,map) }
+        return getResult { service.searchPhotos(perPage,page,map) }
     }
 
 }

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Flickr</string>
-    <string name="search">Search</string>
+    <string name="search">search for  <i>kittens</i>" </string>
     <string name="no_results">No results found</string>
     <string name="try_different">Try searching something different</string>
+    <string name="error">Something went wrong!</string>
+    <string name="try_later">Please check your connection or try again later</string>
 </resources>

@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/no_search_icon"
+        android:id="@+id/ivIcon"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
@@ -16,6 +16,7 @@
         app:srcCompat="@drawable/no_results" />
 
     <TextView
+        android:id="@+id/ivTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -26,6 +27,7 @@
         android:textSize="@dimen/font_medium" />
 
     <TextView
+        android:id="@+id/ivMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

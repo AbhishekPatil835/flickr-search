@@ -27,8 +27,18 @@ import androidx.core.app.ComponentActivity.ExtraData
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
 import android.content.Context
+import android.os.Message
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import com.example.Flickr.data.ERROR
+import com.example.Flickr.data.LIST
+import com.example.Flickr.data.NO_DATA
+import com.example.Flickr.data.Status
+import kotlinx.android.synthetic.main.layout_no_results.*
 
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
@@ -45,12 +55,17 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     val adapter = SearchAdapter()
 
 
+    private var oldQuery: String = "kittens"
+    private var newQuery = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         searchVM = injectViewModel(viewModelFactory)
+
+        if (searchVM.oldQuery.isNotEmpty())
+            oldQuery = searchVM.oldQuery
 
 
         val config = resources.configuration
@@ -62,45 +77,63 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
         etSearch.setOnEditorActionListener { view: View, actionId: Int, _: KeyEvent? ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH && etSearch.text.toString().isNotEmpty()) {
-                val query = etSearch.text.toString()
+                newQuery = etSearch.text.toString()
                 etSearch.text?.clear()
 
-                searchPhotos(query)
-                true
+                searchPhotos(newQuery)
             }
             true
         }
 
         ivSearch.setOnClickListener {
-            val query = etSearch.text.toString()
-            etSearch.text?.clear()
+            if (etSearch.text.toString().isNotEmpty()) {
+                newQuery = etSearch.text.toString()
+                etSearch.text?.clear()
 
-            searchPhotos(query)
+                searchPhotos(newQuery)
+            }
         }
 
 
         searchPhotos()
     }
 
-    private fun searchPhotos(query: String = "kittens") {
+
+
+    private fun searchPhotos(query: String = oldQuery) {
         dismissKeyboard()
         val data  =searchVM.search(query)
-
 
 
 
         data?.pagedList?.observe(this, Observer {
 
             adapter.submitList(it)
-            if (it.size == 0) {
-                llNoResults.visibility = View.VISIBLE
-                rvPhotos.visibility = View.GONE
-            } else {
-                llNoResults.visibility = View.GONE
-                rvPhotos.visibility = View.VISIBLE
 
+        })
+
+        data?.networkState?.observe(this, Observer {
+
+            when (it.status) {
+                Status.RUNNING -> {
+
+                }
+                Status.SUCCESS -> {
+                    show(LIST)
+                    oldQuery = newQuery
+                }
+                Status.FAILED -> {
+                    show(ERROR)
+                }
+                Status.NO_DATA -> {
+                    if (adapter.itemCount  == 0 || oldQuery != newQuery )
+                            show(NO_DATA)
+
+                }
             }
         })
+
+
     }
 
 
@@ -122,6 +155,36 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     private fun dismissKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(etSearch.windowToken, 0)
+    }
+
+    private fun show(what:Int = LIST) {
+
+        when (what) {
+            LIST -> {
+                llNoResults.visibility = View.GONE
+                rvPhotos.visibility = View.VISIBLE
+            }
+
+            ERROR -> {
+                setDetails(R.drawable.ic_error,R.string.error,R.string.try_later)
+                llNoResults.visibility = View.VISIBLE
+                rvPhotos.visibility = View.GONE
+            }
+
+            NO_DATA -> {
+                setDetails()
+                llNoResults.visibility = View.VISIBLE
+                rvPhotos.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun setDetails(@DrawableRes icon:Int = R.drawable.no_results,
+                           @StringRes title:Int = R.string.no_results,
+                           @StringRes message: Int = R.string.try_different) {
+        ivIcon.setImageDrawable(ContextCompat.getDrawable(this,icon))
+        ivTitle.text = resources.getString(title)
+        ivMessage.text = resources.getString(message)
     }
 
 }

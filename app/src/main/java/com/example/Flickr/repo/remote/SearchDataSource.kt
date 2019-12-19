@@ -15,7 +15,6 @@ import javax.inject.Inject
 class SearchDataSource @Inject constructor(
 
     private val remoteDataSource: SearchRemoteDataSource,
-    private val coroutineScope: CoroutineScope,
     private val query: String
 
 ) : PageKeyedDataSource<Int, Photo>() {
@@ -41,31 +40,33 @@ class SearchDataSource @Inject constructor(
         networkState.postValue(NetworkState.LOADING)
         val page = params.key
         fetchData(query,page, params.requestedLoadSize) {
+
             callback.onResult(it, page + 1)
         }
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Photo>) {
 
-        val page = params.key
-        fetchData(query,page, params.requestedLoadSize) {
-            callback.onResult(it, page - 1)
-        }
+
     }
 
     private fun fetchData(query: String,page: Int, pageSize: Int, callback: (List<Photo>) -> Unit) {
 
-        val response = remoteDataSource.search(query,page)
+        val response = remoteDataSource.search(pageSize,query,page)
 
-        Log.e("SearchRepo"," $response")
+        Log.e("SearchRepo"," ${response.status}")
 
 
         if (response.status == Result.Status.SUCCESS) {
 
             val results = response.data?.photos?.photos
 
-            callback(results!!)
-            networkState.postValue(NetworkState.LOADED)
+            if(results.isNullOrEmpty()) {
+                networkState.postValue(NetworkState.noData())
+            } else {
+                callback(results)
+                networkState.postValue(NetworkState.LOADED)
+            }
 
         } else if (response.status == Result.Status.ERROR) {
             networkState.postValue(NetworkState.error(response.message ?: "unknown err"))
