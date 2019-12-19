@@ -11,6 +11,11 @@ versions.support = "1.0.0"
 versions.supportLibraryVersion = '1.1.0'
 versions.gsonVersion = '2.8.2'
 versions.okhttp = '3.10.0'
+versions.arch_core = "2.0.1"
+versions.mockito = "2.25.0"
+versions.mockito_all = "1.10.19"
+versions.mockito_android = "2.25.0"
+versions.mockwebserver = "3.8.1"
 versions.retrofit = '2.6.0'
 versions.navigationVersion = '2.0.0'
 versions.daggerVersion = "2.16"
@@ -83,6 +88,18 @@ test.runner = "androidx.test:runner:${versions.test_runner}"
 test.rules = "androidx.test:rules:${versions.test_rules}"
 deps.test = test
 
+def mockito = [:]
+mockito.core = "org.mockito:mockito-core:$versions.mockito"
+mockito.all = "org.mockito:mockito-all:$versions.mockito_all"
+mockito.android = "org.mockito:mockito-android:$versions.mockito_android"
+deps.mockito = mockito
+
+def arch_core = [:]
+arch_core.runtime = "androidx.arch.core:core-runtime:$versions.arch_core"
+arch_core.testing = "androidx.arch.core:core-testing:$versions.arch_core"
+deps.arch_core = arch_core
+
+deps.mock_web_server = "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver"
 deps.android_gradle_plugin = "com.android.tools.build:gradle:${versions.android_gradle_plugin}"
 deps.constraint_layout = "androidx.constraintlayout:constraintlayout:${versions.constraint_layout}"
 deps.junit = "junit:junit:${versions.junit}"

@@ -1,0 +1,66 @@
+{
+  "photos": {
+    "page": 1,
+    "pages": 28945,
+    "perpage": 5,
+    "total": "144724",
+    "photo": [
+      {
+        "id": "49242902122",
+        "owner": "22539273@N00",
+        "secret": "c5b6c48cf5",
+        "server": "65535",
+        "farm": 66,
+        "title": "Car park @ Secteur du Berger @ Semnoz @ Annecy",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "49242685376",
+        "owner": "22539273@N00",
+        "secret": "ee3e61b915",
+        "server": "65535",
+        "farm": 66,
+        "title": "Chalet Nordique de la Forêt @ Secteur du Berger @ Semnoz @ Annecy",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "49242213218",
+        "owner": "22539273@N00",
+        "secret": "ecc934322f",
+        "server": "65535",
+        "farm": 66,
+        "title": "Chairlift @ TS Belvédère @ Secteur du Berger @ Semnoz @ Annecy",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "49242684256",
+        "owner": "22539273@N00",
+        "secret": "60b4598b67",
+        "server": "65535",
+        "farm": 66,
+        "title": "Secteur du Berger @ Semnoz @ Annecy",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "49242683561",
+        "owner": "22539273@N00",
+        "secret": "af4c7e9dc9",
+        "server": "65535",
+        "farm": 66,
+        "title": "Secteur du Berger @ Semnoz @ Annecy",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      }
+    ]
+  },
+  "stat": "ok"
+}

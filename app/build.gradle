@@ -66,7 +66,17 @@ dependencies {
 
     // Android Testing Support Library's runner and rules
     testImplementation deps.junit
+    testImplementation deps.junit
+    testImplementation deps.mock_web_server
+    testImplementation deps.mockito.core
+    testImplementation deps.network.mock
+    testImplementation deps.arch_core.testing
+
+
     androidTestImplementation deps.test.runner
     androidTestImplementation deps.test.rules
     androidTestImplementation deps.test.ext_junit
+    androidTestImplementation deps.mockito.core
+    androidTestImplementation deps.mockito.android
+    androidTestImplementation deps.network.mock
 }
