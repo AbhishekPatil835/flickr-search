@@ -38,7 +38,7 @@ class AppModule {
             = SearchRemoteDataSource(flickrApi)
 
     @Provides
-    fun provideCoroutineScopeIO() = CoroutineScope(Dispatchers.IO)
+    fun provideCoroutineScopeIO() = CoroutineScope(Dispatchers.Main)
 
     private fun <T> provideService(okhttpClient: OkHttpClient,
                                    converterFactory: GsonConverterFactory, clazz: Class<T>): T {

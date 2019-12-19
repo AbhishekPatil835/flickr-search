@@ -1,18 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".search.MainActivity">
 
+    <FrameLayout
+        android:id="@+id/flSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_xsmall"
+        android:padding="@dimen/margin_small"
+        >
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etSearch"
+            android:textColorHint="@android:color/darker_gray"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/searchbar_height"
+            android:hint="@string/search"
+            android:imeOptions="actionSearch"
+            android:paddingStart="@dimen/margin_small"
+            android:paddingEnd="@dimen/margin_small"
+            android:background="@drawable/white_round_background"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:inputType="text" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="@dimen/margin_small"
+            app:srcCompat="@drawable/ic_search" />
+    </FrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPhotos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/rv_photo_item"
-        android:id="@+id/rvPhotos"/>
+        tools:listitem="@layout/rv_photo_item" />
+
+    <include
+        layout="@layout/layout_no_results"
+        android:id="@+id/llNoResults"
+        android:visibility="gone"
+        />
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

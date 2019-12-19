@@ -35,6 +35,8 @@ class SearchDataSource @Inject constructor(
 
     }
 
+
+
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Photo>) {
         networkState.postValue(NetworkState.LOADING)
         val page = params.key

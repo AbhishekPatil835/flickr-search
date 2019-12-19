@@ -31,6 +31,7 @@ class SearchRepo @Inject constructor(private val searchRemoteDataSource: SearchR
         return Data(
             LivePagedListBuilder(dataSourceFactory,
                 SearchDataSourceFactory.pagedListConfig()).build(),networkState)
+
     }
 
 

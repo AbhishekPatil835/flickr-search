@@ -5,6 +5,10 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.content.res.Configuration
 import android.graphics.Color
+import android.text.Editable
+import android.view.KeyEvent
+import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +21,14 @@ import com.example.Flickr.utils.ItemDivider
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
+import android.content.Context.INPUT_METHOD_SERVICE
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.app.ComponentActivity.ExtraData
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+import android.content.Context
+import android.util.Log
+import android.view.inputmethod.InputMethodManager
 
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
@@ -48,16 +60,38 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
         rvPhotos.adapter = adapter
 
+        etSearch.setOnEditorActionListener { view: View, actionId: Int, _: KeyEvent? ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH && etSearch.text.toString().isNotEmpty()) {
+                val query = etSearch.text.toString()
+                etSearch.text?.clear()
+
+                searchPhotos(query)
+                true
+            }
+            true
+        }
+
+        ivSearch.setOnClickListener {
+            val query = etSearch.text.toString()
+            etSearch.text?.clear()
+
+            searchPhotos(query)
+        }
+
+
         searchPhotos()
     }
 
-    private fun searchPhotos(query: String = "nature") {
+    private fun searchPhotos(query: String = "kittens") {
+        dismissKeyboard()
         val data  =searchVM.search(query)
 
 
 
         data?.pagedList?.observe(this, Observer {
+
             adapter.submitList(it)
+
         })
     }
 
@@ -75,6 +109,11 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 throw AssertionError("This should not be the case.")
             }
         }
+    }
+
+    private fun dismissKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(etSearch.windowToken, 0)
     }
 
 }
