@@ -22,6 +22,7 @@ import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
 import android.content.Context
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -56,8 +57,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
         searchVM = injectViewModel(viewModelFactory)
 
-        if (searchVM.oldQuery.isNotEmpty())
-            oldQuery = searchVM.oldQuery
+
 
 
         val config = resources.configuration
@@ -92,11 +92,16 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     override fun onResume() {
         super.onResume()
+
+        if (searchVM.oldQuery.isNotEmpty())
+            oldQuery = searchVM.oldQuery
+
         searchPhotos()
     }
 
 
     private fun searchPhotos(query: String = oldQuery) {
+
         dismissKeyboard()
         val data  =searchVM.search(query)
 
@@ -122,6 +127,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 Status.FAILED -> {
                     toggleLoading(false)
                     show(ERROR)
+                    searchVM.oldQuery  = ""
+                    oldQuery = ""
                 }
                 Status.NO_DATA -> {
                     toggleLoading(false)
