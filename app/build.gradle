@@ -8,14 +8,14 @@ apply plugin: 'kotlin-allopen'
 
 allOpen {
     // allows mocking for classes w/o directly opening them for release builds
-    annotation 'com.example.Flickr.OpenClass'
+    annotation 'com.example.flickr.OpenClass'
 }
 
 android {
     compileSdkVersion build_versions.target_sdk
     buildToolsVersion build_versions.build_tools
     defaultConfig {
-        applicationId "com.example.Flickr"
+        applicationId "com.example.flickr"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1
