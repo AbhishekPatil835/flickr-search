@@ -101,7 +101,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
 
     private fun searchPhotos(query: String = oldQuery) {
-
         dismissKeyboard()
         val data  =searchVM.search(query)
 
@@ -159,6 +158,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
     private fun dismissKeyboard() {
+        etSearch.clearFocus()
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(etSearch.windowToken, 0)
     }
